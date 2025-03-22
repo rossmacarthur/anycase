@@ -1,0 +1,10 @@
+maturin
+ruff
+pytest
+pytest-benchmark
+
+case_conversion
+inflection
+pydantic
+pyheck
+stringcase
