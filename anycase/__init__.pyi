@@ -35,7 +35,7 @@ def to_camel(s: str, acronyms: Optional[dict[str, str]] = None) -> str:
 
     For example:
 
-        >>> cases.to_camel("foo_bar")
+        >>> anycase.to_camel("foo_bar")
         'fooBar'
 
     The `acronyms` argument is a mapping of lowercase words to an override
@@ -43,7 +43,7 @@ def to_camel(s: str, acronyms: Optional[dict[str, str]] = None) -> str:
 
     For example:
 
-        >>> cases.to_camel("xml http request", acronyms={"http": "HTTP"})
+        >>> anycase.to_camel("xml http request", acronyms={"http": "HTTP"})
         'xmlHTTPRequest'
 
     """
@@ -58,7 +58,7 @@ def to_pascal(s: str, acronyms: Optional[dict[str, str]] = None) -> str:
 
     For example:
 
-        >>> cases.to_pascal("foo_bar")
+        >>> anycase.to_pascal("foo_bar")
         'FooBar'
 
     The `acronyms` argument is a mapping of lowercase words to an override
@@ -66,7 +66,7 @@ def to_pascal(s: str, acronyms: Optional[dict[str, str]] = None) -> str:
 
     For example:
 
-        >>> cases.to_pascal("xml http request", acronyms={"http": "HTTP"})
+        >>> anycase.to_pascal("xml http request", acronyms={"http": "HTTP"})
         'XmlHTTPRequest'
 
     """
@@ -81,7 +81,7 @@ def to_snake(s: str) -> str:
 
     For example:
 
-        >>> cases.to_snake("fooBar")
+        >>> anycase.to_snake("fooBar")
         'foo_bar'
 
     """
@@ -96,7 +96,7 @@ def to_screaming_snake(s: str) -> str:
 
     For example:
 
-        >>> cases.to_screaming_snake("fooBar")
+        >>> anycase.to_screaming_snake("fooBar")
         'FOO_BAR'
 
     """
@@ -111,7 +111,7 @@ def to_kebab(s: str) -> str:
 
     For example:
 
-        >>> cases.to_kebab("fooBar")
+        >>> anycase.to_kebab("fooBar")
         'foo-bar'
 
     """
@@ -126,7 +126,7 @@ def to_screaming_kebab(s: str) -> str:
 
     For example:
 
-        >>> cases.to_screaming_kebab("fooBar")
+        >>> anycase.to_screaming_kebab("fooBar")
         'FOO-BAR'
 
     """
@@ -141,7 +141,7 @@ def to_train(s: str, acronyms: Optional[dict[str, str]] = None) -> str:
 
     For example:
 
-        >>> cases.to_train("fooBar")
+        >>> anycase.to_train("fooBar")
         'Foo-Bar'
 
     The `acronyms` argument is a mapping of lowercase words to an override
@@ -149,7 +149,7 @@ def to_train(s: str, acronyms: Optional[dict[str, str]] = None) -> str:
 
     For example:
 
-        >>> cases.to_train("xml http request", acronyms={"http": "HTTP"})
+        >>> anycase.to_train("xml http request", acronyms={"http": "HTTP"})
         'Xml-HTTP-Request'
 
     """
@@ -164,7 +164,7 @@ def to_lower(s: str) -> str:
 
     For example:
 
-        >>> cases.to_lower("FooBar")
+        >>> anycase.to_lower("FooBar")
         'foo bar'
 
     """
@@ -179,7 +179,7 @@ def to_title(s: str, acronyms: Optional[dict[str, str]] = None) -> str:
 
     For example:
 
-        >>> cases.to_title("foo_bar")
+        >>> anycase.to_title("foo_bar")
         'Foo Bar'
 
     The `acronyms` argument is a mapping of lowercase words to an override
@@ -187,7 +187,7 @@ def to_title(s: str, acronyms: Optional[dict[str, str]] = None) -> str:
 
     For example:
 
-        >>> cases.to_title("xml_http_request", acronyms={"http": "HTTP"})
+        >>> anycase.to_title("xml_http_request", acronyms={"http": "HTTP"})
         'Xml HTTP Request'
 
     """
@@ -202,7 +202,7 @@ def to_upper(s: str) -> str:
 
     For example:
 
-        >>> cases.to_upper("fooBar")
+        >>> anycase.to_upper("fooBar")
         'FOO BAR'
 
     """

@@ -115,7 +115,7 @@ fn get_acronym<'a>(s: &str, acronyms: Option<&'a PyDict>) -> Option<&'a str> {
 
 /// A case conversion library with Unicode support, implemented in Rust.
 #[pymodule]
-fn cases(_py: Python, m: &PyModule) -> PyResult<()> {
+fn anycase(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(to_camel, m)?)?;
     m.add_function(wrap_pyfunction!(to_pascal, m)?)?;
     m.add_function(wrap_pyfunction!(to_snake, m)?)?;

@@ -23,7 +23,7 @@ jobs:
           args: --release --out dist --find-interpreter
           sccache: 'true'
       - name: Install wheel
-        run: pip install pycases --find-links dist --force-reinstall
+        run: pip install py-anycase --find-links dist --force-reinstall
       - name: Test
         run: pytest --benchmark-disable
 

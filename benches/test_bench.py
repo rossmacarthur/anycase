@@ -24,8 +24,8 @@ def test_bench_to_snake_python_re(benchmark: BenchmarkFixture):
     assert benchmark(to_snake, INPUT) == EXPECT
 
 
-def test_bench_to_snake_cases(benchmark: BenchmarkFixture):
-    from cases import to_snake
+def test_bench_to_snake_anycase(benchmark: BenchmarkFixture):
+    from anycase import to_snake
 
     assert benchmark(to_snake, INPUT) == EXPECT
 

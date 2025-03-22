@@ -1,7 +1,7 @@
 import re
 import os
 
-import cases
+import anycase
 import pytest
 
 TESTS = [
@@ -61,102 +61,102 @@ TESTS = [
 
 def test_to_camel():
     for s, _, camel in TESTS:
-        assert cases.to_camel(s) == camel
+        assert anycase.to_camel(s) == camel
 
 
 def test_to_camel_with_acronyms():
     assert (
-        cases.to_camel("xml_http_request", acronyms={"xml": "XML"}) == "xmlHttpRequest"
+        anycase.to_camel("xml_http_request", acronyms={"xml": "XML"}) == "xmlHttpRequest"
     )
     assert (
-        cases.to_camel("xml_http_request", acronyms={"http": "HTTP"})
+        anycase.to_camel("xml_http_request", acronyms={"http": "HTTP"})
         == "xmlHTTPRequest"
     )
 
 
 def test_to_pascal():
-    assert cases.to_pascal("test case") == "TestCase"
+    assert anycase.to_pascal("test case") == "TestCase"
 
 
 def test_to_pascal_with_acronyms():
     assert (
-        cases.to_pascal("xml_http_request", acronyms={"xml": "XML"}) == "XMLHttpRequest"
+        anycase.to_pascal("xml_http_request", acronyms={"xml": "XML"}) == "XMLHttpRequest"
     )
     assert (
-        cases.to_pascal("xml_http_request", acronyms={"xml": "XML", "http": "HTTP"})
+        anycase.to_pascal("xml_http_request", acronyms={"xml": "XML", "http": "HTTP"})
         == "XMLHTTPRequest"
     )
     assert (
-        cases.to_pascal("xml_http_request", acronyms={"xml": "XML", "http": "Http"})
+        anycase.to_pascal("xml_http_request", acronyms={"xml": "XML", "http": "Http"})
         == "XMLHttpRequest"
     )
 
 
 def test_to_snake():
     for s, snake, _ in TESTS:
-        assert cases.to_snake(s) == snake
+        assert anycase.to_snake(s) == snake
 
 
 def test_to_screaming_snake():
-    assert cases.to_screaming_snake("test case") == "TEST_CASE"
+    assert anycase.to_screaming_snake("test case") == "TEST_CASE"
 
 
 def test_to_kebab():
-    assert cases.to_kebab("test case") == "test-case"
+    assert anycase.to_kebab("test case") == "test-case"
 
 
 def test_to_screaming_kebab():
-    assert cases.to_screaming_kebab("test case") == "TEST-CASE"
+    assert anycase.to_screaming_kebab("test case") == "TEST-CASE"
 
 
 def test_to_train():
-    assert cases.to_train("test case") == "Test-Case"
+    assert anycase.to_train("test case") == "Test-Case"
 
 
 def test_to_train_with_acronyms():
     assert (
-        cases.to_train("xml_http_request", acronyms={"xml": "XML"})
+        anycase.to_train("xml_http_request", acronyms={"xml": "XML"})
         == "XML-Http-Request"
     )
     assert (
-        cases.to_train("xml_http_request", acronyms={"xml": "XML", "http": "HTTP"})
+        anycase.to_train("xml_http_request", acronyms={"xml": "XML", "http": "HTTP"})
         == "XML-HTTP-Request"
     )
     assert (
-        cases.to_train("xml_http_request", acronyms={"xml": "XML", "http": "Http"})
+        anycase.to_train("xml_http_request", acronyms={"xml": "XML", "http": "Http"})
         == "XML-Http-Request"
     )
 
 
 def test_to_lower():
-    assert cases.to_lower("Test-case") == "test case"
+    assert anycase.to_lower("Test-case") == "test case"
 
 
 def test_to_title():
-    assert cases.to_title("Test-case") == "Test Case"
+    assert anycase.to_title("Test-case") == "Test Case"
 
 
 def test_to_title_with_acronyms():
     assert (
-        cases.to_title("xml_http_request", acronyms={"xml": "XML"})
+        anycase.to_title("xml_http_request", acronyms={"xml": "XML"})
         == "XML Http Request"
     )
     assert (
-        cases.to_title("xml_http_request", acronyms={"xml": "XML", "http": "HTTP"})
+        anycase.to_title("xml_http_request", acronyms={"xml": "XML", "http": "HTTP"})
         == "XML HTTP Request"
     )
     assert (
-        cases.to_title("xml_http_request", acronyms={"xml": "XML", "http": "Http"})
+        anycase.to_title("xml_http_request", acronyms={"xml": "XML", "http": "Http"})
         == "XML Http Request"
     )
 
 
 def test_to_upper():
-    assert cases.to_upper("test case") == "TEST CASE"
+    assert anycase.to_upper("test case") == "TEST CASE"
 
 
 def examples() -> list[tuple[str, str]]:
-    pyi_file = os.path.join(os.path.dirname(__file__), "..", "cases", "__init__.pyi")
+    pyi_file = os.path.join(os.path.dirname(__file__), "..", "anycase", "__init__.pyi")
     with open(pyi_file) as f:
         contents = f.read()
     examples = re.findall(r"^\s*>>> (.*)\n\s*(.*)$", contents, re.MULTILINE)
