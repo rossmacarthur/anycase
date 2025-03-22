@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badgers.space/pypi/version/anycase)](https://pypi.org/project/anycase)
 [![License](https://badgers.space/github/license/rossmacarthur/anycase)](https://github.com/rossmacarthur/anycase#license)
-[![Build Status](https://badgers.space/github/checks/rossmacarthur/anycase/trunk?label=build)](https://github.com/rossmacarthur/anycase/actions/workflows/build.yaml)
+[![Build Status](https://badgers.space/github/checks/rossmacarthur/anycase/trunk?label=build)](https://github.com/rossmacarthur/anycase/actions/workflows/python.yaml)
 
 A case conversion library for Python.
 
