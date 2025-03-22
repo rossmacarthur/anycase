@@ -1,4 +1,4 @@
-package cases_test
+package anycase_test
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rossmacarthur/cases"
+	"github.com/rossmacarthur/anycase"
 	"github.com/stretchr/testify/require"
 )
 
@@ -192,69 +192,69 @@ var tests []testCase = []testCase{
 func TestToCamel(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.in, func(t *testing.T) {
-			got := cases.ToCamel(tc.in)
+			got := anycase.ToCamel(tc.in)
 			require.Equal(t, tc.camelCase, got, fmt.Sprintf("'%s'", tc.in))
 		})
 	}
 }
 
 func TestToPascal(t *testing.T) {
-	result := cases.ToPascal("test case")
+	result := anycase.ToPascal("test case")
 	require.Equal(t, "TestCase", result)
 }
 
 func TestToSnake(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.in, func(t *testing.T) {
-			got := cases.ToSnake(tc.in)
+			got := anycase.ToSnake(tc.in)
 			require.Equal(t, tc.snakeCase, got, fmt.Sprintf("'%s'", tc.in))
 		})
 	}
 }
 
 func TestToScreamingSnake(t *testing.T) {
-	result := cases.ToScreamingSnake("test case")
+	result := anycase.ToScreamingSnake("test case")
 	require.Equal(t, "TEST_CASE", result)
 }
 
 func TestToKebab(t *testing.T) {
-	result := cases.ToKebab("test case")
+	result := anycase.ToKebab("test case")
 	require.Equal(t, "test-case", result)
 }
 
 func TestToScreamingKebab(t *testing.T) {
-	result := cases.ToScreamingKebab("test case")
+	result := anycase.ToScreamingKebab("test case")
 	require.Equal(t, "TEST-CASE", result)
 }
 
 func TestToTrain(t *testing.T) {
-	result := cases.ToTrain("test case")
+	result := anycase.ToTrain("test case")
 	require.Equal(t, "Test-Case", result)
 }
 
 func TestToLower(t *testing.T) {
-	result := cases.ToLower("Test-case")
+	result := anycase.ToLower("Test-case")
 	require.Equal(t, "test case", result)
 }
 
 func TestToTitle(t *testing.T) {
-	result := cases.ToTitle("Test-case")
+	result := anycase.ToTitle("Test-case")
 	require.Equal(t, "Test Case", result)
 }
 
 func TestToUpper(t *testing.T) {
-	result := cases.ToUpper("Test-case")
+	result := anycase.ToUpper("Test-case")
 	require.Equal(t, "TEST CASE", result)
 }
 
 func BenchmarkToSnake(b *testing.B) {
 	s := strings.Repeat("ThisIsATestCase", 100)
 
-	require.True(b, cases.ToSnake(s) == regexToSnake(s))
+	require.True(b, anycase.ToSnake(s) == regexToSnake(s))
 
-	b.Run("cases", func(b *testing.B) {
+	b.Run("anycase", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			cases.ToSnake(s)
+			anycase.ToSnake(s)
 		}
 	})
 
@@ -268,8 +268,8 @@ func BenchmarkToSnake(b *testing.B) {
 // regexToSnake is a regex implementation to convert to snake case to compare
 // the benchmark to.
 //
-// This function doesn't support as many word boundaries as cases.ToSnake but
-// it is still much slower than the cases.ToSnake implementation.
+// This function doesn't support as many word boundaries as anycase.ToSnake but
+// it is still much slower than the anycase.ToSnake implementation.
 //
 // From https://stackoverflow.com/a/56616250/4591251
 func regexToSnake(s string) string {

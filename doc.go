@@ -1,4 +1,4 @@
-// Package cases provides functions for converting strings between different
+// Package anycase provides functions for converting strings between different
 // cases.
 //
 // The currently supported cases are:
@@ -16,4 +16,4 @@
 // | ToTitle(s)          | Title Case           |
 // | ToUpper(s)          | UPPER CASE           |
 
-package cases
+package anycase
