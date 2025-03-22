@@ -1,7 +1,7 @@
 # anycase
 
 [![Go Reference](https://pkg.go.dev/badge/rossmacarthur/anycase/format.svg)](https://pkg.go.dev/github.com/rossmacarthur/anycase)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/rossmacarthur/anycase/build.yaml?branch=trunk)](https://github.com/rossmacarthur/anycase/actions/workflows/build.yaml)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/rossmacarthur/anycase/go.yaml?branch=trunk)](https://github.com/rossmacarthur/anycase/actions/workflows/go.yaml)
 
 A case conversion library for Go.
 

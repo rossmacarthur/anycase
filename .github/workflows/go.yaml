@@ -1,6 +1,11 @@
-name: build
+name: go
 
 on: [push, pull_request]
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./go
 
 jobs:
   build:
