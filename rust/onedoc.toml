@@ -1,0 +1,12 @@
+[links]
+"crate::fmt" = "https://doc.rs/anycase/latest/anycase/fmt/index.html"
+"to_camel" = "https://docs.rs/anycase/latest/anycase/fn.to_camel.html"
+"to_pascal" = "https://docs.rs/anycase/latest/anycase/fn.to_pascal.html"
+"to_snake" = "https://docs.rs/anycase/latest/anycase/fn.to_snake.html"
+"to_screaming_snake" = "https://docs.rs/anycase/latest/anycase/fn.to_screaming_snake.html"
+"to_kebab" = "https://docs.rs/anycase/latest/anycase/fn.to_kebab.html"
+"to_screaming_kebab" = "https://docs.rs/anycase/latest/anycase/fn.to_screaming_kebab.html"
+"to_train" = "https://docs.rs/anycase/latest/anycase/fn.to_train.html"
+"to_lower" = "https://docs.rs/anycase/latest/anycase/fn.to_lower.html"
+"to_title" = "https://docs.rs/anycase/latest/anycase/fn.to_title.html"
+"to_upper" = "https://docs.rs/anycase/latest/anycase/fn.to_upper.html"

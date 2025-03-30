@@ -1,5 +1,5 @@
 [package]
-name = "anycase"
+name = "py-anycase"
 version = "0.0.0"
 edition = "2021"
 publish = false
@@ -10,4 +10,5 @@ name = "anycase"
 crate-type = ["cdylib"]
 
 [dependencies]
+anycase = { path = "../rust" }
 pyo3 = "0.19.0"

@@ -1,0 +1,16 @@
+[package]
+name = "anycase"
+version = "0.0.0"
+authors = ["Ross MacArthur <ross@macarthur.io>"]
+edition = "2018"
+rust-version = "1.56.0"
+description = "a case conversion library for Rust"
+readme = "README.md"
+repository = "github.com/rossmacarthur/anycase"
+license = "MIT OR Apache-2.0"
+keywords = ["case", "snake", "camel", "pascal", "unicode"]
+categories = ["text-processing", "no-std"]
+
+[features]
+default = ["alloc"]
+alloc = []

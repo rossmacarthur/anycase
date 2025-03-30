@@ -6,7 +6,7 @@ use std::fmt::Write;
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 
-use crate::transform::{fmt_lower, fmt_title, fmt_upper};
+use ::anycase as lib;
 
 /// Convert a string to 'camelCase'.
 #[pyfunction]
@@ -16,16 +16,16 @@ fn to_camel(s: &str, acronyms: Option<&PyDict>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         if first {
             first = false;
-            fmt_lower(buf, s)
+            lib::fmt::write_lower(buf, s)
         } else {
             match get_acronym(s, acronyms) {
                 Some(acronym) => write!(buf, "{}", acronym),
-                None => fmt_title(buf, s),
+                None => lib::fmt::write_title(buf, s),
             }
         }
     };
 
-    transform::to_string(s, word_fn, "")
+    lib::fmt::to_string(s, word_fn, lib::fmt::delim_none)
 }
 
 /// Convert a string to 'PascalCase'.
@@ -35,35 +35,35 @@ fn to_pascal(s: &str, acronyms: Option<&PyDict>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
-            None => fmt_title(buf, s),
+            None => lib::fmt::write_title(buf, s),
         }
     };
 
-    transform::to_string(s, word_fn, "")
+    lib::fmt::to_string(s, word_fn, lib::fmt::delim_none)
 }
 
 /// Convert a string to 'snake_case'.
 #[pyfunction]
 fn to_snake(s: &str) -> String {
-    transform::to_string(s, fmt_lower, "_")
+    lib::to_snake(s)
 }
 
 /// Convert a string to 'SCREAMING_SNAKE_CASE'.
 #[pyfunction]
 fn to_screaming_snake(s: &str) -> String {
-    transform::to_string(s, fmt_upper, "_")
+    lib::to_screaming_snake(s)
 }
 
 /// Convert a string to 'kebab-case'.
 #[pyfunction]
 fn to_kebab(s: &str) -> String {
-    transform::to_string(s, fmt_lower, "-")
+    lib::to_kebab(s)
 }
 
 /// Convert a string to 'SCREAMING-KEBAB-CASE'.
 #[pyfunction]
 fn to_screaming_kebab(s: &str) -> String {
-    transform::to_string(s, fmt_upper, "-")
+    lib::to_screaming_kebab(s)
 }
 
 /// Convert a string to 'Train-Case'.
@@ -73,17 +73,17 @@ fn to_train(s: &str, acronyms: Option<&PyDict>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
-            None => fmt_title(buf, s),
+            None => lib::fmt::write_title(buf, s),
         }
     };
 
-    transform::to_string(s, word_fn, "-")
+    lib::fmt::to_string(s, word_fn, lib::fmt::delim_fn("-"))
 }
 
 /// Convert a string to 'lower case'.
 #[pyfunction]
 fn to_lower(s: &str) -> String {
-    transform::to_string(s, fmt_lower, " ")
+    lib::to_lower(s)
 }
 
 /// Convert a string to 'Title Case'.
@@ -93,17 +93,17 @@ fn to_title(s: &str, acronyms: Option<&PyDict>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
-            None => fmt_title(buf, s),
+            None => lib::fmt::write_title(buf, s),
         }
     };
 
-    transform::to_string(s, word_fn, " ")
+    lib::fmt::to_string(s, word_fn, lib::fmt::delim_fn(" "))
 }
 
 /// Convert a string to 'UPPER CASE'.
 #[pyfunction]
 fn to_upper(s: &str) -> String {
-    transform::to_string(s, fmt_upper, " ")
+    lib::to_upper(s)
 }
 
 fn get_acronym<'a>(s: &str, acronyms: Option<&'a PyDict>) -> Option<&'a str> {
