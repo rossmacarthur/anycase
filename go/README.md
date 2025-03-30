@@ -1,11 +1,9 @@
 # anycase
 
-[![Go Reference](https://pkg.go.dev/badge/rossmacarthur/anycase/format.svg)](https://pkg.go.dev/github.com/rossmacarthur/anycase)
+[![Go Reference](https://pkg.go.dev/badge/rossmacarthur/anycase/go/format.svg)](https://pkg.go.dev/github.com/rossmacarthur/anycase/go)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/rossmacarthur/anycase/go.yaml?branch=trunk)](https://github.com/rossmacarthur/anycase/actions/workflows/go.yaml)
 
 A case conversion library for Go.
-
-![anycase](https://github.com/rossmacarthur/anycase/assets/17109887/ab3a4c71-6090-49f3-a67f-b1ab395999c6)
 
 The currently supported anycase are:
 
@@ -36,13 +34,13 @@ Word boundaries are defined as follows:
 Install using
 
 ```sh
-go get -u github.com/rossmacarthur/anycase
+go get -u github.com/rossmacarthur/anycase/go
 ```
 
 Now convert a string using the relevant function.
 
 ```go
-import "github.com/rossmacarthur/anycase"
+import "github.com/rossmacarthur/anycase/go"
 
 anycase.ToSnake("XMLHttpRequest") // returns "xml_http_request"
 ```
@@ -57,7 +55,7 @@ For example if you wanted `dotted.snake.case` you could do the following.
 ```go
 import (
     "strings"
-    "github.com/rossmacarthur/anycase"
+    "github.com/rossmacarthur/anycase/go"
 )
 
 func delimDot(s *strings.Builder) {
@@ -72,7 +70,7 @@ Here is a more involved example in order to handle acronyms in `PascalCase`.
 ```go
 import (
     "strings"
-    "github.com/rossmacarthur/anycase"
+    "github.com/rossmacarthur/anycase/go"
 )
 
 // The default ToPascal function has no understanding of acronyms

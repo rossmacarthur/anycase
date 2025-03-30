@@ -1,4 +1,4 @@
-module github.com/rossmacarthur/anycase
+module github.com/rossmacarthur/anycase/go
 
 go 1.19
 

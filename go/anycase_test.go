@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rossmacarthur/anycase"
+	anycase "github.com/rossmacarthur/anycase/go"
 	"github.com/stretchr/testify/require"
 )
 
