@@ -1,5 +1,5 @@
 [links]
-"crate::fmt" = "https://doc.rs/anycase/latest/anycase/fmt/index.html"
+"crate::raw" = "https://doc.rs/anycase/latest/anycase/raw/index.html"
 "to_camel" = "https://docs.rs/anycase/latest/anycase/fn.to_camel.html"
 "to_pascal" = "https://docs.rs/anycase/latest/anycase/fn.to_pascal.html"
 "to_snake" = "https://docs.rs/anycase/latest/anycase/fn.to_snake.html"

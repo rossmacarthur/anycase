@@ -15,6 +15,15 @@
 //! assert_eq!(s, "hello_world");
 //! ```
 //!
+//! Alternatively, you can use the [`fmt`] module to get a [`Display`] type.
+//!
+//! ```
+//! let s = format!("snake case: {}", anycase::fmt::snake("Hello world!"));
+//! assert_eq!(s, "snake case: hello_world");
+//! ```
+//!
+//! [`Display`]: core::fmt::Display
+//!
 //! # 🤸 Usage
 //!
 //! The `anycase` crate provides a set of functions to convert strings between
@@ -33,18 +42,18 @@
 //! - [`to_title`]           outputs `Hello World`
 //! - [`to_upper`]           outputs `HELLO WORLD`
 //!
-//! Additionally, the crate provides the [`fmt`] module containing the raw
+//! Additionally, the crate provides the [`raw`] module containing the raw
 //! functions which can be used to implement custom case conversion functions.
 //!
 //! ```
-//! use anycase::fmt;
+//! use anycase::raw;
 //!
 //! let input = "Hello world!";
-//! let output =  fmt::to_string(input, fmt::write_upper, fmt::delim_fn("."));
+//! let output =  raw::to_string(input, raw::write_upper, raw::delim_fn("."));
 //! assert_eq!(output, "HELLO.WORLD");
 //! ```
 //!
-//! See the [module level documentation](crate::fmt) for more details.
+//! See the [module level documentation](crate::raw) for more details.
 //!
 //! # How does it work?
 //!
@@ -81,75 +90,78 @@ extern crate alloc;
 
 #[cfg(feature = "alloc")]
 use alloc::string::String;
+#[cfg(feature = "alloc")]
+use alloc::string::ToString;
 
 pub mod fmt;
+pub mod raw;
 
-/// Convert a string to 'camelCase'.
+/// Returns a string in 'camelCase'.
 #[cfg(feature = "alloc")]
-pub fn to_camel(s: &str) -> String {
-    let mut first = true;
-    let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
-        if first {
-            first = false;
-            fmt::write_lower(buf, s)?;
-        } else {
-            fmt::write_title(buf, s)?;
-        }
-        Ok(())
-    };
-    fmt::to_string(s, word_fn, |_| Ok(()))
+#[inline]
+pub fn to_camel<S: AsRef<str>>(s: S) -> String {
+    fmt::camel(s).to_string()
 }
 
-/// Convert a string to 'PascalCase'.
+/// Returns a string in 'PascalCase'.
 #[cfg(feature = "alloc")]
-pub fn to_pascal(s: &str) -> String {
-    fmt::to_string(s, fmt::write_title, fmt::delim_none)
+#[inline]
+pub fn to_pascal<S: AsRef<str>>(s: S) -> String {
+    fmt::pascal(s).to_string()
 }
 
-/// Convert a string to 'snake_case'.
+/// Returns a string in 'snake_case'.
 #[cfg(feature = "alloc")]
-pub fn to_snake(s: &str) -> String {
-    fmt::to_string(s, fmt::write_lower, fmt::delim_fn("_"))
+#[inline]
+pub fn to_snake<S: AsRef<str>>(s: S) -> String {
+    fmt::snake(s).to_string()
 }
 
-/// Convert a string to 'SCREAMING_SNAKE_CASE'.
+/// Returns a string in 'SCREAMING_SNAKE_CASE'.
 #[cfg(feature = "alloc")]
-pub fn to_screaming_snake(s: &str) -> String {
-    fmt::to_string(s, fmt::write_upper, fmt::delim_fn("_"))
+#[inline]
+pub fn to_screaming_snake<S: AsRef<str>>(s: S) -> String {
+    fmt::screaming_snake(s).to_string()
 }
 
-/// Convert a string to 'kebab-case'.
+/// Returns a string in 'kebab-case'.
 #[cfg(feature = "alloc")]
-pub fn to_kebab(s: &str) -> String {
-    fmt::to_string(s, fmt::write_lower, fmt::delim_fn("-"))
+#[inline]
+pub fn to_kebab<S: AsRef<str>>(s: S) -> String {
+    fmt::kebab(s).to_string()
 }
 
-/// Convert a string to 'SCREAMING-KEBAB-CASE'.
+/// Returns a string in 'SCREAMING-KEBAB-CASE'.
 #[cfg(feature = "alloc")]
-pub fn to_screaming_kebab(s: &str) -> String {
-    fmt::to_string(s, fmt::write_upper, fmt::delim_fn("-"))
+#[inline]
+pub fn to_screaming_kebab<S: AsRef<str>>(s: S) -> String {
+    fmt::screaming_kebab(s).to_string()
 }
 
-/// Convert a string to 'Train-Case'.
+/// Returns a string in 'Train-Case'.
 #[cfg(feature = "alloc")]
-pub fn to_train(s: &str) -> String {
-    fmt::to_string(s, fmt::write_title, fmt::delim_fn("-"))
+#[inline]
+pub fn to_train<S: AsRef<str>>(s: S) -> String {
+    fmt::train(s).to_string()
 }
 
-/// Convert a string to 'lower case'.
+/// Returns a string in 'lower case'.
 #[cfg(feature = "alloc")]
-pub fn to_lower(s: &str) -> String {
-    fmt::to_string(s, fmt::write_lower, fmt::delim_fn(" "))
+#[inline]
+pub fn to_lower<S: AsRef<str>>(s: S) -> String {
+    fmt::lower(s).to_string()
 }
 
-/// Convert a string to 'Title Case'.
+/// Returns a string in 'Title Case'.
 #[cfg(feature = "alloc")]
-pub fn to_title(s: &str) -> String {
-    fmt::to_string(s, fmt::write_title, fmt::delim_fn(" "))
+#[inline]
+pub fn to_title<S: AsRef<str>>(s: S) -> String {
+    fmt::title(s).to_string()
 }
 
-/// Convert a string to 'UPPER CASE'.
+/// Returns a string in 'UPPER CASE'.
 #[cfg(feature = "alloc")]
-pub fn to_upper(s: &str) -> String {
-    fmt::to_string(s, fmt::write_upper, fmt::delim_fn(" "))
+#[inline]
+pub fn to_upper<S: AsRef<str>>(s: S) -> String {
+    fmt::upper(s).to_string()
 }

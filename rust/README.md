@@ -23,6 +23,13 @@ let s = anycase::to_snake("Hello world!");
 assert_eq!(s, "hello_world");
 ```
 
+Alternatively, you can use the `fmt` module to get a `Display` type.
+
+```rust
+let s = format!("snake case: {}", anycase::fmt::snake("Hello world!"));
+assert_eq!(s, "snake case: hello_world");
+```
+
 ## 🤸 Usage
 
 The `anycase` crate provides a set of functions to convert strings between
@@ -41,18 +48,18 @@ Given an input of `Hello world!`:
 - [`to_title`][to_title]           outputs `Hello World`
 - [`to_upper`][to_upper]           outputs `HELLO WORLD`
 
-Additionally, the crate provides the `fmt` module containing the raw
+Additionally, the crate provides the `raw` module containing the raw
 functions which can be used to implement custom case conversion functions.
 
 ```rust
-use anycase::fmt;
+use anycase::raw;
 
 let input = "Hello world!";
-let output =  fmt::to_string(input, fmt::write_upper, fmt::delim_fn("."));
+let output =  raw::to_string(input, raw::write_upper, raw::delim_fn("."));
 assert_eq!(output, "HELLO.WORLD");
 ```
 
-See the [module level documentation][crate::fmt] for more details.
+See the [module level documentation][crate::raw] for more details.
 
 ## How does it work?
 
@@ -90,7 +97,7 @@ This project is distributed under the terms of both the MIT license and the Apac
 See [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-MIT](LICENSE-MIT) for details.
 
 
-[crate::fmt]: https://doc.rs/anycase/latest/anycase/fmt/index.html
+[crate::raw]: https://doc.rs/anycase/latest/anycase/raw/index.html
 [to_camel]: https://docs.rs/anycase/latest/anycase/fn.to_camel.html
 [to_kebab]: https://docs.rs/anycase/latest/anycase/fn.to_kebab.html
 [to_lower]: https://docs.rs/anycase/latest/anycase/fn.to_lower.html

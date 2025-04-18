@@ -1,5 +1,3 @@
-mod transform;
-
 use std::fmt;
 use std::fmt::Write;
 
@@ -16,16 +14,16 @@ fn to_camel(s: &str, acronyms: Option<&PyDict>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         if first {
             first = false;
-            lib::fmt::write_lower(buf, s)
+            lib::raw::write_lower(buf, s)
         } else {
             match get_acronym(s, acronyms) {
                 Some(acronym) => write!(buf, "{}", acronym),
-                None => lib::fmt::write_title(buf, s),
+                None => lib::raw::write_title(buf, s),
             }
         }
     };
 
-    lib::fmt::to_string(s, word_fn, lib::fmt::delim_none)
+    lib::raw::to_string(s, word_fn, lib::raw::delim_none)
 }
 
 /// Convert a string to 'PascalCase'.
@@ -35,11 +33,11 @@ fn to_pascal(s: &str, acronyms: Option<&PyDict>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
-            None => lib::fmt::write_title(buf, s),
+            None => lib::raw::write_title(buf, s),
         }
     };
 
-    lib::fmt::to_string(s, word_fn, lib::fmt::delim_none)
+    lib::raw::to_string(s, word_fn, lib::raw::delim_none)
 }
 
 /// Convert a string to 'snake_case'.
@@ -73,11 +71,11 @@ fn to_train(s: &str, acronyms: Option<&PyDict>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
-            None => lib::fmt::write_title(buf, s),
+            None => lib::raw::write_title(buf, s),
         }
     };
 
-    lib::fmt::to_string(s, word_fn, lib::fmt::delim_fn("-"))
+    lib::raw::to_string(s, word_fn, lib::raw::delim_fn("-"))
 }
 
 /// Convert a string to 'lower case'.
@@ -93,11 +91,11 @@ fn to_title(s: &str, acronyms: Option<&PyDict>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
-            None => lib::fmt::write_title(buf, s),
+            None => lib::raw::write_title(buf, s),
         }
     };
 
-    lib::fmt::to_string(s, word_fn, lib::fmt::delim_fn(" "))
+    lib::raw::to_string(s, word_fn, lib::raw::delim_fn(" "))
 }
 
 /// Convert a string to 'UPPER CASE'.
