@@ -77,10 +77,12 @@ type delimFn = func(s *strings.Builder)
 
 type writeFn = func(s *strings.Builder, word string)
 
-// Transform reconstructs the string using the given functions.
+// Transform reconstructs the provided string using the given "word function" and
+// "delimiter function".
 //
-// wordFn is called for each word and delimFn is called for each word boundary.
-func Transform(s string, wf writeFn, df delimFn) string {
+// The word function is called for each word in the string, and the delimiter
+// function is called for each delimiter between words.
+func Transform(s string, wordFn writeFn, delimFn delimFn) string {
 	out := strings.Builder{}
 	out.Grow(len(s))
 
@@ -89,28 +91,29 @@ func Transform(s string, wf writeFn, df delimFn) string {
 	// when we are on the first word
 	first := true
 	// the byte index of the start of the current word
-	start := 0
+	w0 := 0
 	// the byte index of the end of the current word
-	end := -1
+	w1 := -1
 	// the current state of the word boundary machine
 	state := stateUnknown
 
-	emit := func(end int) {
-		if end-start > 0 {
+	write := func(w0, w1 int) {
+		if w1-w0 > 0 {
 			if first {
 				first = false
-			} else if df != nil {
-				df(&out)
+			} else if delimFn != nil {
+				delimFn(&out)
 			}
-			wf(&out, string(runes[start:end]))
+			wordFn(&out, string(runes[w0:w1]))
 		}
 	}
 
-	for i, r := range runes {
-		if !(unicode.IsLetter(r) || unicode.IsNumber(r) || unicode.IsSymbol(r)) {
+	for i := 0; i < len(runes); i++ {
+		r := runes[i]
+		if !unicode.IsLetter(r) && !unicode.IsNumber(r) {
 			state = stateDelims
-			if end == -1 {
-				end = i // store the end of the previous word
+			if w1 == -1 {
+				w1 = i // store the end of the previous word
 			}
 			continue
 		}
@@ -118,32 +121,37 @@ func Transform(s string, wf writeFn, df delimFn) string {
 		isLower := unicode.IsLower(r)
 		isUpper := unicode.IsUpper(r)
 
-		if state == stateDelims {
-			emit(end)
-			start = i
-			end = -1
-
-		} else if state == stateLower && isUpper {
-			emit(i)
-			start = i
-
-		} else if state == stateUpper && isUpper &&
-			i+1 < len(s) && unicode.IsLower(runes[i+1]) {
-			emit(i)
-			start = i
+		switch {
+		case state == stateDelims:
+			if w1 != -1 {
+				write(w0, w1)
+			}
+			w0 = i
+			w1 = -1
+		case state == stateLower && isUpper:
+			write(w0, i)
+			w0 = i
+		case state == stateUpper && isUpper && i+1 < len(runes) && unicode.IsLower(runes[i+1]):
+			write(w0, i)
+			w0 = i
 		}
 
 		if isLower {
 			state = stateLower
 		} else if isUpper {
 			state = stateUpper
+		} else if state == stateDelims {
+			state = stateUnknown
 		}
 	}
 
-	if state == stateDelims {
-		emit(end)
-	} else {
-		emit(len(runes))
+	switch state {
+	case stateDelims:
+		if w1 != -1 {
+			write(w0, w1)
+		}
+	default:
+		write(w0, len(runes))
 	}
 
 	return out.String()

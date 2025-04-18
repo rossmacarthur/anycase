@@ -15,14 +15,14 @@
 //! - [`write_lower`]: converts the word to lowercase
 //! - [`write_upper`]: converts the word to uppercase
 //! - [`write_title`]: converts the first character (unicode code point) of the
-//!                    word to uppercase and the rest to lowercase
+//!   word to uppercase and the rest to lowercase
 //!
 //! **Delimiter functions**
 //!
 //! - [`delim_none`]: does nothing (no delimiter)
 //!
 //! - [`delim_fn`]: returns a "delimiter function" that writes the given
-//!                 delimiter to the buffer
+//!   delimiter to the buffer
 //!
 //!
 //! # Examples
