@@ -5,11 +5,12 @@ use pyo3::prelude::*;
 use pyo3::types::PyDict;
 
 use ::anycase as lib;
+use pyo3::types::PyString;
 
 /// Convert a string to 'camelCase'.
 #[pyfunction]
 #[pyo3(signature = (s, /, acronyms = None))]
-fn to_camel(s: &str, acronyms: Option<&PyDict>) -> String {
+fn to_camel(s: &str, acronyms: Option<&Bound<'_, PyDict>>) -> String {
     let mut first = true;
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         if first {
@@ -29,7 +30,7 @@ fn to_camel(s: &str, acronyms: Option<&PyDict>) -> String {
 /// Convert a string to 'PascalCase'.
 #[pyfunction]
 #[pyo3(signature = (s, /, acronyms = None))]
-fn to_pascal(s: &str, acronyms: Option<&PyDict>) -> String {
+fn to_pascal(s: &str, acronyms: Option<&Bound<'_, PyDict>>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
@@ -67,7 +68,7 @@ fn to_screaming_kebab(s: &str) -> String {
 /// Convert a string to 'Train-Case'.
 #[pyfunction]
 #[pyo3(signature = (s, /, acronyms = None))]
-fn to_train(s: &str, acronyms: Option<&PyDict>) -> String {
+fn to_train(s: &str, acronyms: Option<&Bound<'_, PyDict>>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
@@ -87,7 +88,7 @@ fn to_lower(s: &str) -> String {
 /// Convert a string to 'Title Case'.
 #[pyfunction]
 #[pyo3(signature = (s, /, acronyms = None))]
-fn to_title(s: &str, acronyms: Option<&PyDict>) -> String {
+fn to_title(s: &str, acronyms: Option<&Bound<'_, PyDict>>) -> String {
     let word_fn = |buf: &mut String, s: &str| -> fmt::Result {
         match get_acronym(s, acronyms) {
             Some(acronym) => write!(buf, "{}", acronym),
@@ -104,16 +105,16 @@ fn to_upper(s: &str) -> String {
     lib::to_upper(s)
 }
 
-fn get_acronym<'a>(s: &str, acronyms: Option<&'a PyDict>) -> Option<&'a str> {
-    acronyms
-        .as_ref()
-        .and_then(|d| d.get_item(s.to_lowercase()))
-        .and_then(|v| v.extract::<&str>().ok())
+fn get_acronym<'py>(
+    k: &str,
+    acronyms: Option<&Bound<'py, PyDict>>,
+) -> Option<Bound<'py, PyString>> {
+    acronyms?.get_item(k.to_lowercase()).ok()??.extract().ok()
 }
 
 /// A case conversion library with Unicode support, implemented in Rust.
 #[pymodule]
-fn anycase(_py: Python, m: &PyModule) -> PyResult<()> {
+fn anycase(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(to_camel, m)?)?;
     m.add_function(wrap_pyfunction!(to_pascal, m)?)?;
     m.add_function(wrap_pyfunction!(to_snake, m)?)?;
