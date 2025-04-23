@@ -6,3 +6,10 @@ A case conversion library for [Go](./go), [Rust](./rust), and [Python](./python)
 
 Anycase provides a consistent way of converting between different case styles.
 And has a similar API across languages.
+
+## License
+
+This project is distributed under the terms of both the MIT license and the
+Apache License (Version 2.0).
+
+See [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-MIT](LICENSE-MIT) for details.

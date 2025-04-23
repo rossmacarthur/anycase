@@ -97,5 +97,7 @@ Macbook M2 Max.
 
 ## License
 
-This project is licensed under the terms of the MIT license. See
-[LICENSE](LICENSE) for more details.
+This project is distributed under the terms of both the MIT license and the
+Apache License (Version 2.0).
+
+See [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-MIT](LICENSE-MIT) for details.
