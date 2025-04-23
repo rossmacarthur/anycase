@@ -1,33 +1,9 @@
 # anycase
 
 [![Go Reference](https://pkg.go.dev/badge/rossmacarthur/anycase/go/format.svg)](https://pkg.go.dev/github.com/rossmacarthur/anycase/go)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/rossmacarthur/anycase/go.yaml?branch=trunk)](https://github.com/rossmacarthur/anycase/actions/workflows/go.yaml)
+[![Build Status](https://badgers.space/github/checks/rossmacarthur/anycase/trunk?label=build)](https://github.com/rossmacarthur/anycase/actions/workflows/go.yaml)
 
-A case conversion library for Go.
-
-The currently supported anycase are:
-
-| Function                                | Output                 |
-| :-------------------------------------- | :--------------------- |
-| `anycase.ToCamel(s)`                    | `camelCase`            |
-| `anycase.ToPascal(s)`                   | `PascalCase`           |
-| `anycase.ToSnake(s)`                    | `snake_case`           |
-| `anycase.ToScreamingSnake(s)`           | `SCREAMING_SNAKE_CASE` |
-| `anycase.ToKebab(s)`                    | `kebab-case`           |
-| `anycase.ToScreamingKebab(s)`           | `SCREAMING-KEBAB-CASE` |
-| `anycase.ToTrain(s)`                    | `Train-Case`           |
-| `anycase.ToLower(s)`                    | `lower case`           |
-| `anycase.ToTitle(s)`                    | `Title Case`           |
-| `anycase.ToUpper(s)`                    | `UPPER CASE`           |
-| `anycase.Transform(s, wordFn, delimFn)` | *your own case here*   |
-
-Word boundaries are defined as follows:
-- A set of consecutive Unicode non-letter/number/symbol e.g. `foo _bar` is two
-  words (`foo` and `bar`)
-- A transition from a lowercase letter to an uppercase letter e.g. `fooBar` is
-  two words (`foo` and `Bar`)
-- The second last uppercase letter in a word with multiple uppercase letters
-  e.g. `FOOBar` is two words (`FOO` and `Bar`)
+💼 A case conversion library for Go.
 
 ## Getting started
 
@@ -45,10 +21,26 @@ import "github.com/rossmacarthur/anycase/go"
 anycase.ToSnake("XMLHttpRequest") // returns "xml_http_request"
 ```
 
-## Customizing
+## 🤸 Usage
 
-This library also exposes a `Transform` function which allows flexible
-customization of the output.
+The following cases are available.
+
+| Function                                | Output                 |
+| :-------------------------------------- | :--------------------- |
+| `anycase.ToCamel(s)`                    | `camelCase`            |
+| `anycase.ToPascal(s)`                   | `PascalCase`           |
+| `anycase.ToSnake(s)`                    | `snake_case`           |
+| `anycase.ToScreamingSnake(s)`           | `SCREAMING_SNAKE_CASE` |
+| `anycase.ToKebab(s)`                    | `kebab-case`           |
+| `anycase.ToScreamingKebab(s)`           | `SCREAMING-KEBAB-CASE` |
+| `anycase.ToTrain(s)`                    | `Train-Case`           |
+| `anycase.ToLower(s)`                    | `lower case`           |
+| `anycase.ToTitle(s)`                    | `Title Case`           |
+| `anycase.ToUpper(s)`                    | `UPPER CASE`           |
+| `anycase.Transform(s, wordFn, delimFn)` | *your own case here*   |
+
+Additionally, this library also exposes a `Transform` function which allows
+flexible customization of the output.
 
 For example if you wanted `dotted.snake.case` you could do the following.
 
@@ -88,6 +80,20 @@ writeFn := func(s *strings.Builder, word string) {
 }
 anycase.Transform("xml_http_request", writeFn, nil) // returns "XMLHTTPRequest"
 ```
+
+## How does it work?
+
+This implementation divides the input string into words and applies a "word
+function" to each word and calls a "delimiter function" for each word boundary
+(the space between words).
+
+Word boundaries are defined as follows:
+- A set of consecutive non-letter/number/symbol e.g. `foo _bar` is two words
+  `foo` and `bar`.
+- A transition from a lowercase letter to an uppercase letter e.g. `fooBar` is
+  two words `foo` and `Bar`.
+- The second last uppercase letter in a word with multiple uppercase letters
+  e.g. `FOOBar` is two words `FOO` and `Bar`.
 
 ## License
 
