@@ -1,27 +1,17 @@
 """
 A case conversion library with Unicode support, implemented in Rust.
 
-Each of the provided functions using the same underlying implementation which
-does the following:
-- Divide the input string into words
-- Convert each word as required
-- Join the words back together optionally with a separator
+This implementation divides the input string into words and applies a "word
+function" to each word and calls a "delimiter function" for each word boundary
+(the space between words).
 
 Word boundaries are defined as follows:
-
-- A set of consecutive Unicode non-letter and non-number characters.
-
-  For example: 'foo _bar' is two words (foo and bar)
-
-- A transition from a lowercase letter to an uppercase letter.
-
-  For example: fooBar is two words (foo and Bar)
-
-- A transition from multiple uppercase letters to a single uppercase letter
-  followed by lowercase letters.
-
-  For example: FOOBar is two words (FOO and Bar)
-
+- A set of consecutive non-letter/number/symbol e.g. `foo _bar` is two words
+  `foo` and `bar`.
+- A transition from a lowercase letter to an uppercase letter e.g. `fooBar` is
+  two words `foo` and `Bar`.
+- The second last uppercase letter in a word with multiple uppercase letters
+  e.g. `FOOBar` is two words `FOO` and `Bar`.
 """
 
 from typing import Optional

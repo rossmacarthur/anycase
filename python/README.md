@@ -1,10 +1,9 @@
 # anycase
 
-[![PyPI version](https://badgers.space/pypi/version/anycase)](https://pypi.org/project/anycase)
-[![License](https://badgers.space/github/license/rossmacarthur/anycase)](https://github.com/rossmacarthur/anycase#license)
+[![PyPI version](https://badgers.space/pypi/version/py-anycase)](https://pypi.org/project/py-anycase)
 [![Build Status](https://badgers.space/github/checks/rossmacarthur/anycase/trunk?label=build)](https://github.com/rossmacarthur/anycase/actions/workflows/python.yaml)
 
-A case conversion library for Python.
+💼 A case conversion library for Python.
 
 ## Features
 
@@ -13,23 +12,7 @@ A case conversion library for Python.
 - Support for Unicode characters
 - Support for providing acronyms in title case
 
-**Supported cases**
-
-| Function                        | Output                 |
-| :------------------------------ | :--------------------- |
-| `anycase.to_camel(s)`           | `camelCase`            |
-| `anycase.to_pascal(s)`          | `PascalCase`           |
-| `anycase.to_snake(s)`           | `snake_case`           |
-| `anycase.to_screaming_snake(s)` | `SCREAMING_SNAKE_CASE` |
-| `anycase.to_kebab(s)`           | `kebab-case`           |
-| `anycase.to_screaming_kebab(s)` | `SCREAMING-KEBAB-CASE` |
-| `anycase.to_train(s)`           | `Train-Case`           |
-| `anycase.to_lower(s)`           | `lower case`           |
-| `anycase.to_title(s)`           | `Title Case`           |
-| `anycase.to_upper(s)`           | `UPPER CASE`           |
-
-
-## Getting started
+## 🚀 Getting started
 
 Install using
 
@@ -45,31 +28,27 @@ import anycase
 anycase.to_snake("XMLHttpRequest") # returns "xml_http_request"
 ```
 
-## Details
+## 🤸 Usage
 
-Each of the provided functions using the same underlying implementation which
-does the following:
-- Divide the input string into words
-- Convert each word as required
-- Join the words back together optionally with a separator
+The `py-anycase` package provides a set of functions to convert strings between
+different case styles. The following cases are available.
 
-Word boundaries are defined as follows:
+| Function                        | Output                 |
+| :------------------------------ | :--------------------- |
+| `anycase.to_camel(s)`           | `camelCase`            |
+| `anycase.to_pascal(s)`          | `PascalCase`           |
+| `anycase.to_snake(s)`           | `snake_case`           |
+| `anycase.to_screaming_snake(s)` | `SCREAMING_SNAKE_CASE` |
+| `anycase.to_kebab(s)`           | `kebab-case`           |
+| `anycase.to_screaming_kebab(s)` | `SCREAMING-KEBAB-CASE` |
+| `anycase.to_train(s)`           | `Train-Case`           |
+| `anycase.to_lower(s)`           | `lower case`           |
+| `anycase.to_title(s)`           | `Title Case`           |
+| `anycase.to_upper(s)`           | `UPPER CASE`           |
 
-- A set of consecutive Unicode non-letter and non-number characters.
-
-  For example: 'foo _bar' is two words (foo and bar)
-
-- A transition from a lowercase letter to an uppercase letter.
-
-  For example: fooBar is two words (foo and Bar)
-
-- A transition from multiple uppercase letters to a single uppercase letter
-  followed by lowercase letters.
-
-  For example: FOOBar is two words (FOO and Bar)
-
-Functions where the transform is "title" accept an optional `acronyms` argument,
-which is a mapping of lowercase words to their output. For example:
+Additionally, functions where the "word function" is "title" accept an optional
+`acronyms` argument, which is a mapping of lowercase words to their output. For
+example:
 
 ```python
 >>> anycase.to_pascal("xml_http_request", acronyms={"xml": "XML"})
@@ -77,6 +56,21 @@ which is a mapping of lowercase words to their output. For example:
 >>> anycase.to_pascal("xml_http_request", acronyms={"xml": "XML", "http": "HTTP"})
 'XMLHTTPRequest'
 ```
+
+## How does it work?
+
+This implementation divides the input string into words and applies a "word
+function" to each word and calls a "delimiter function" for each word boundary
+(the space between words).
+
+Word boundaries are defined as follows:
+- A set of consecutive non-letter/number/symbol e.g. `foo _bar` is two words
+  `foo` and `bar`.
+- A transition from a lowercase letter to an uppercase letter e.g. `fooBar` is
+  two words `foo` and `Bar`.
+- The second last uppercase letter in a word with multiple uppercase letters
+  e.g. `FOOBar` is two words `FOO` and `Bar`.
+
 
 ## Benchmarks
 
