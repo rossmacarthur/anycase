@@ -6,14 +6,18 @@ edition = "2018"
 rust-version = "1.56.0"
 description = "a case conversion library for Rust"
 readme = "README.md"
-repository = "github.com/rossmacarthur/anycase"
+repository = "https://github.com/rossmacarthur/anycase"
 license = "MIT OR Apache-2.0"
 keywords = ["case", "snake", "camel", "pascal", "unicode"]
 categories = ["text-processing", "no-std"]
 include = ["src/**/*", "README.md"]
 
+[package.metadata.docs.rs]
+rustdoc-args = ["--cfg", "docsrs"]
+
 [features]
-default = ["alloc"]
+default = ["std"]
+std = ["alloc"]
 alloc = []
 
 [dev-dependencies]

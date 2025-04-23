@@ -1,12 +1,18 @@
+[badges]
+github_workflow = { label = "build", name = "rust" }
+
 [links]
 "crate::raw" = "https://doc.rs/anycase/latest/anycase/raw/index.html"
-"to_camel" = "https://docs.rs/anycase/latest/anycase/fn.to_camel.html"
-"to_pascal" = "https://docs.rs/anycase/latest/anycase/fn.to_pascal.html"
-"to_snake" = "https://docs.rs/anycase/latest/anycase/fn.to_snake.html"
-"to_screaming_snake" = "https://docs.rs/anycase/latest/anycase/fn.to_screaming_snake.html"
-"to_kebab" = "https://docs.rs/anycase/latest/anycase/fn.to_kebab.html"
-"to_screaming_kebab" = "https://docs.rs/anycase/latest/anycase/fn.to_screaming_kebab.html"
-"to_train" = "https://docs.rs/anycase/latest/anycase/fn.to_train.html"
-"to_lower" = "https://docs.rs/anycase/latest/anycase/fn.to_lower.html"
-"to_title" = "https://docs.rs/anycase/latest/anycase/fn.to_title.html"
-"to_upper" = "https://docs.rs/anycase/latest/anycase/fn.to_upper.html"
+"char::is_alphanumeric" = "https://doc.rust-lang.org/stable/core/primitive.char.html#method.is_alphanumeric"
+"char::is_lowercase" = "https://doc.rust-lang.org/stable/core/primitive.char.html#method.is_lowercase"
+"char::is_uppercase" = "https://doc.rust-lang.org/stable/core/primitive.char.html#method.is_uppercase"
+"as_camel" = "https://docs.rs/anycase/latest/anycase/fn.as_camel.html"
+"as_pascal" = "https://docs.rs/anycase/latest/anycase/fn.as_pascal.html"
+"as_snake" = "https://docs.rs/anycase/latest/anycase/fn.as_snake.html"
+"as_screaming_snake" = "https://docs.rs/anycase/latest/anycase/fn.as_screaming_snake.html"
+"as_kebab" = "https://docs.rs/anycase/latest/anycase/fn.as_kebab.html"
+"as_screaming_kebab" = "https://docs.rs/anycase/latest/anycase/fn.as_screaming_kebab.html"
+"as_train" = "https://docs.rs/anycase/latest/anycase/fn.as_train.html"
+"as_lower" = "https://docs.rs/anycase/latest/anycase/fn.as_lower.html"
+"as_title" = "https://docs.rs/anycase/latest/anycase/fn.as_title.html"
+"as_upper" = "https://docs.rs/anycase/latest/anycase/fn.as_upper.html"

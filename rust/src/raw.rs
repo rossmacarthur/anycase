@@ -1,12 +1,12 @@
 //! This module provides raw functions for transforming strings into different
-//! cases. It is used by the `to_*` functions in the root of this crate.
+//! cases. It is used by the functions in the root of this crate.
 //!
 //! The main function is [`transform`], which takes a string and a buffer and
 //! transforms the string into the buffer using the provided "word function" and
 //! "delimiter function". The word function is called for each word in the
 //! string, and the delimiter function is called for each delimiter between
 //! words. For convenience [`to_string`] is provided, which is a thin wrapper
-//! around [`transform`] that returns a new [`String`] instead of writing to a
+//! around [`transform`] that returns a new `String` instead of writing to a
 //! buffer. Additionally, there are several pre-defined word functions and
 //! delimiter functions that can be used with [`transform`] and [`to_string`].
 //!
@@ -28,8 +28,7 @@
 //! # Examples
 //!
 //! In this example we convert a string to `SCREAMING.DOT.CASE` a custom
-//! conversion that is not provided by the `to_*` functions in the root of this
-//! crate.
+//! conversion that is not provided by this crate.
 //!
 //! ```
 //! use anycase::raw;
@@ -38,7 +37,6 @@
 //! let output =  raw::to_string(input, raw::write_upper, raw::delim_fn("."));
 //! assert_eq!(output, "HELLO.WORLD");
 //! ```
-//!
 
 use core::fmt;
 use core::fmt::Write;
@@ -49,8 +47,9 @@ use alloc::string::String;
 /// Reconstructs the provided string, `s` as a new string using the given "word
 /// function" and "delimiter function".
 ///
-/// See the [module level documentation](crate::fmt) for more details.
+/// See the [module level documentation](crate::raw) for more details.
 #[cfg(feature = "alloc")]
+#[cfg_attr(docsrs, doc(cfg(feature = "alloc")))]
 pub fn to_string<WF, DF>(s: &str, word_fn: WF, delim_fn: DF) -> String
 where
     WF: FnMut(&mut String, &str) -> fmt::Result,
@@ -72,7 +71,7 @@ enum State {
 /// Reconstructs the provided string, `s`, into the given buffer, `buf`, using
 /// the given "word function" and "delimiter function".
 ///
-/// See the [module level documentation](crate::fmt) for more details.
+/// See the [module level documentation](crate::raw) for more details.
 pub fn transform<B, WF, DF>(s: &str, buf: &mut B, mut word_fn: WF, mut delim_fn: DF) -> fmt::Result
 where
     B: Write,
