@@ -10,14 +10,14 @@
 //!
 //! Then you can use the `as_<case>` function to get a [`Display`] type.
 //! ```
-//! let s = format!("snake case: {}", anycase::as_snake("Hello world!"));
-//! assert_eq!(s, "snake case: hello_world");
+//! let s = format!("snake case: {}", anycase::as_snake("XMLHttpRequest"));
+//! assert_eq!(s, "snake case: xml_http_request");
 //! ```
 //!
 //! Alternatively, you can use the `to_<case>` function to get a `String`.
 //! ```
-//! let s = anycase::to_snake("Hello world!");
-//! assert_eq!(s, "hello_world");
+//! let s = anycase::to_snake("XMLHttpRequest");
+//! assert_eq!(s, "xml_http_request");
 //! ```
 //!
 //! # 🤸 Usage
